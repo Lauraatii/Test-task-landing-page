@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="/styles/styles.css" />
+</head>
+<body>
+  <img src="/images/Logo.png" alt="Logo" class="logo" />
+
+  <main>
+    <section class="improvement-section">
+      <div class="left-content">
+        <h1 class="main-heading">
+          We have put together a swing
+          <span>improvement solution to help you</span>
+          <strong class="highlight"><%= breakLevel %></strong>
+        </h1>
+        
+        <p class="pack-title">Pack includes:</p>
+        <div class="pack-items">
+          <div>Swing analyzer - Hackmotion core</div>
+          <div>Drills by coach Tyler Farell</div>
+          <div>Game improvement</div>
+        </div>
+        <button class="start-now">
+          Start Now →
+        </button>
+      </div>
+
+      <div class="right-content">
+        <img class="graph" src="/images/Improvement Graph.png" alt="Improvement Graph" />
+        <img class="frame" src="/images/Frame 4151179.png" alt="Frame" />
+      </div>
+    </section>
+
+    <section class="video-section">
+      <h2>The best solution for you: Impact Training Programme</h2>
+      <div class="video-container">
+        <video id="promo-video" controls>
+          <source src="/video/impact-drill.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="timestamps-container">
+          <div id="progress-line"></div>
+          <div id="timestamps">
+            <div class="card" data-timestamp="5">
+              <span class="arrow">→</span> 
+              Static Top Drill
+              <p class="description">Get a feel for the optimal wrist position at
+                Top of your swing</p>
+            </div>
+            <div class="card" data-timestamp="14">
+              <span class="arrow">→</span> 
+              Dynamic Top Drill
+              <p class="description">Dynamically train your wrist position at Top</p>
+            </div>
+            <div class="card" data-timestamp="24">
+              <span class="arrow">→</span> 
+              Top Full Swing Challenge
+              <p class="description">Train your maximum power swing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Copyright 2023 © HackMotion | All rights reserved</p>
+  </footer>
+
+  <script src="/scripts/script.js"></script>
+</body>
+</html>
