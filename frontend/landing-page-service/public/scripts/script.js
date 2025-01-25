@@ -1,9 +1,17 @@
 const video = document.getElementById('promo-video');
 const cards = document.querySelectorAll('.card');
+const progressFill = document.getElementById('progress-fill');
 
-//Automatic activation based on currentTime + manual click jump 
+// Generate or retrieve userId in localStorage
+if (!localStorage.getItem('userId')) {
+  localStorage.setItem('userId', 'user_' + Date.now());
+}
+const userId = localStorage.getItem('userId');
+
+// Update active cards + progress fill
 video.addEventListener('timeupdate', () => {
   const currentTime = video.currentTime;
+  const duration = video.duration;
 
   cards.forEach((card) => {
     const timestamp = parseInt(card.dataset.timestamp, 10);
@@ -13,8 +21,14 @@ video.addEventListener('timeupdate', () => {
       card.classList.remove('active');
     }
   });
+
+  if (!isNaN(duration) && duration > 0) {
+    const fraction = currentTime / duration;
+    progressFill.style.height = (fraction * 100) + '%';
+  }
 });
 
+// Clicking a card jumps to that timestamp
 cards.forEach((card) => {
   card.addEventListener('click', () => {
     const timestamp = parseInt(card.dataset.timestamp, 10);
@@ -23,9 +37,10 @@ cards.forEach((card) => {
   });
 });
 
-//Analytics
+// Log analytics events
 async function logEvent(eventType) {
   const event = {
+    userId: userId,
     type: eventType,
     timestamp: new Date().toISOString(),
     userAgent: navigator.userAgent,
@@ -40,5 +55,4 @@ async function logEvent(eventType) {
 }
 
 document.addEventListener('DOMContentLoaded', () => logEvent('Page View'));
-
 video.addEventListener('ended', () => logEvent('Full Video Watch'));

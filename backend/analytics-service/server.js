@@ -40,13 +40,15 @@ app.get('/', (req, res) => {
 
 // Endpoint to log events
 app.post('/log-event', async (req, res) => {
-    const event = req.body;
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const newEvent = { ...req.body, ip };
+
     try {
-        await Event.create(event);
-        res.status(200).send('Event logged');
-    } catch (error) {
-        res.status(500).send('Error logging event');
-    }
+    await Event.create(newEvent);
+    res.status(200).send('Event logged');
+  } catch (error) {
+    res.status(500).send('Error logging event');
+  }
 });
 
 app.get('/events', async (req, res) => {
